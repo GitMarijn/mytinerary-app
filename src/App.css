@@ -1,0 +1,64 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+    /* font-family: -apple-system, BlinkMacSystemFont, sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 17px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 50px;
+  align-items: center;
+}
+
+.header >img {
+  max-width: 100%;
+}
+
+.tagline {
+  text-align: center;
+  margin: 70px 0 70px 0;
+}
+
+.browsetext {
+  font-size: 34px;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.landingpage_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.browse_link {
+  display: flex;
+  justify-content: center;
+}
+
+.browse_link >img {
+  max-width: 100px;
+  height: auto;
+  align-self: center;
+  margin: 20px 0 120px 0;
+}
+
+.linkwrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.login_link {
+margin: 20px 30px 20px 30px;
+}
+
+.homebutton {
+  height: 44px;
+}
