@@ -1,5 +1,4 @@
 import React from "react";
-import { data } from "../Assets/JSON/data";
 import {
   MDBCarousel,
   MDBCarouselCaption,
@@ -8,15 +7,23 @@ import {
   MDBView,
   MDBContainer
 } from "mdbreact";
+import { connect } from "react-redux";
+import * as actionCreator from "./../Store/Actions/actions";
 
 class Carousel extends React.Component {
+  
+  componentDidMount() {
+    this.props.getCities();
+  }
+
   render() {
+    if (this.props.citiesIsLoading) return <div>Loading...</div>;
     return (
       <MDBContainer>
         <MDBCarousel activeItem={0} length={9} showControls={true} showIndicators={true}>
           <MDBCarouselInner>
 
-            {data.map((item, index) => (
+            {this.props.cities.map((item, index) => (
               <div key={index}>
                 <MDBCarouselItem itemId={index}>
                   <MDBView>
@@ -36,4 +43,18 @@ class Carousel extends React.Component {
     );
   }
 }
-export default Carousel;
+
+const mapStateToProps = (state) => {
+  return {
+    cities: state.cities,
+    citiesIsLoading: state.citiesIsLoading
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getCities: () => dispatch(actionCreator.fetchCitiesData()),
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Carousel);

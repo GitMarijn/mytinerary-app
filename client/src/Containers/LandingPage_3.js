@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import "./../Assets/Styles/LandingPage.css";
-import browsebutton from "./../Assets/Images/circled-right-2.png";
 import logo from "./../Assets/Images/MYtineraryLogo.png";
 import Navbar from "../Components/Navbar";
-import Carousel from "./../Components/Carousel"
+import Carousel from "./../Components/Carousel";
+import Footer from "./../Components/Footer";
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 class LandingPage extends Component {
   render() {
@@ -21,13 +22,13 @@ class LandingPage extends Component {
         </header>
 
         <div className="landingpage_content">
-          <a className="browse_link" href="javascript:void(0)">
-            <img src={browsebutton} alt="start_browsing" />
-          </a>
-          <span>Popular MYtineraries</span>
+          <Link to="/cities" className="browse_link far fa-arrow-alt-circle-right"></Link>
+          <span className="browse_text">Browse cities</span>
+          <span className="carousel_text">Popular MYtineraries:</span>
         </div>
 
         <Carousel/>
+        <Footer/>
     
       </div>
     );

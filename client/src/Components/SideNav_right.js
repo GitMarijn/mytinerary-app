@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
-import Cities from "./../Containers/Cities"
 
 class SideNavRight extends React.Component {
   closeNav() {
@@ -13,7 +12,9 @@ class SideNavRight extends React.Component {
         <a href="javascript:void(0)" className="closebtn" onClick={this.closeNav}>
           &times;
         </a>
-        <Link to={Cities}>Cities</Link>
+        <Link to="/home" className="sidenav_link" onClick={this.closeNav}>Home</Link>
+        <Link to="/cities" className="sidenav_link" onClick={this.closeNav}>Cities</Link>
+        <Link to="/favourites" className="sidenav_link" onClick={this.closeNav}>Favourites</Link>
       </div>
     );
   }

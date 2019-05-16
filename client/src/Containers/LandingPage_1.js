@@ -2,24 +2,12 @@ import React, { Component } from "react";
 import logo from "./MYtineraryLogo.png";
 import "./App.css";
 import browsebutton from "./circled-right-2.png";
-import homebutton from "./homeIcon.png";
+import Footer from "./../Components/Footer";
 
 class App extends Component {
   render() {
     return <LandingPage />;
   }
-}
-
-class Footer extends React.Component{
-  render() {
-  return (
-    <div className="footer">
-      <a href="./home">
-        <img className="homebutton" src={homebutton} />
-      </a>
-    </div>
-  );
-}
 }
 
 class LandingPage extends Component {
