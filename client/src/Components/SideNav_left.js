@@ -7,13 +7,13 @@ class SideNavLeft extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      logoutError: "",
+      logoutError: ""
     };
   }
 
   componentWillMount() {
-    this.tokenState()
- }
+    this.tokenState();
+  }
 
   componentDidMount() {
     this.setState({
@@ -38,33 +38,32 @@ class SideNavLeft extends React.Component {
     );
   };
 
-tokenState() {
-if (!localStorage["token"]) {
-  this.setState({token: sessionStorage["token"]})
-} else if (!sessionStorage["token"]) {
-  this.setState({token: localStorage["token"]})
-} else if (!sessionStorage["token"] && !localStorage["token"]){
-  this.setState({token: ""})
-}
-}
+  tokenState() {
+    if (!localStorage["token"]) {
+      this.setState({ token: sessionStorage["token"] });
+    } else if (!sessionStorage["token"]) {
+      this.setState({ token: localStorage["token"] });
+    } else if (!sessionStorage["token"] && !localStorage["token"]) {
+      this.setState({ token: "" });
+    }
+  }
 
-closeNavLeft() {
+  closeNavLeft() {
     document.getElementById("mySidenavLeft").style.width = "0";
     document.getElementById("mySidenavLeft").style.border = "none";
   }
 
-logOut = (event) => {
-  event.preventDefault();
-  this.setState({
-    isLoading: true
-  });
+  logOut = event => {
+    event.preventDefault();
+    this.setState({
+      isLoading: true
+    });
     fetch("/api/user/logout", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
       },
-      body:
-        "token=" + this.state.token
+      body: "token=" + this.state.token
     })
       .then(res => res.json())
       .then(json => {
@@ -78,54 +77,64 @@ logOut = (event) => {
           });
           localStorage.clear();
           sessionStorage.clear();
-          this.closeNavLeft()
-          window.location.reload()
+          this.closeNavLeft();
+          window.location.reload();
         } else {
           this.setState({
             logoutError: json.message,
             isLoading: false
           });
-          this.closeNavLeft()
+          this.closeNavLeft();
         }
       });
-  }
+  };
 
   renderButton() {
     let token = this.state.token;
-    if(token == "") {
-      return <Link to="/login">Log in</Link>
+    if (token == "") {
+      return (
+        <div>
+          <Link to="/login">Log in</Link>
+          <Link to="/signup">Sign Up</Link>
+        </div>
+      );
     } else if (!token) {
-      return <Link to="/login">Log in</Link>
-    }
-    else { 
-      return <Link to="/login" onClick={this.logOut}>Log out</Link>
+      return (
+        <div>
+          <Link to="/login">Log in</Link>
+          <Link to="/signup">Sign Up</Link>
+        </div>
+      );
+    } else {
+      return (
+        <Link to="/login" onClick={this.logOut}>Log out</Link>
+      );
     }
   }
 
   render() {
     const { logoutError } = this.state;
-  
+
     if (this.state.isLoading) {
       return <div></div>;
     }
     return (
       <React.Fragment>
-      {logoutError ? this.showMessage({ logoutError }) : null}
-      <div id="error_message" className={this.state.alert}>
-        {this.state.content}
-      </div>
-      
-      <div id="mySidenavLeft" className="sidenav_left">
-        <a
-          href="javascript:void(0)"
-          className="closebtn"
-          onClick={this.closeNavLeft}
-        >
-          &times;
-        </a>
-        {this.renderButton()}
-        <Link to="/signup">Sign Up</Link>
-      </div>
+        {logoutError ? this.showMessage({ logoutError }) : null}
+        <div id="error_message" className={this.state.alert}>
+          {this.state.content}
+        </div>
+
+        <div id="mySidenavLeft" className="sidenav_left">
+          <a
+            href="javascript:void(0)"
+            className="closebtn"
+            onClick={this.closeNavLeft}
+          >
+            &times;
+          </a>
+          {this.renderButton()}
+        </div>
       </React.Fragment>
     );
   }
@@ -137,4 +146,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(SideNavLeft);
+export default connect(
+  null,
+  mapDispatchToProps
+)(SideNavLeft);

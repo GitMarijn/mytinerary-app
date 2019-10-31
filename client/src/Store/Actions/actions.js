@@ -146,14 +146,13 @@ export const getFavourites = favourites => {
 
 export const favouritesIsLoading = favouritesIsLoading => {
   return {
-    type: "FAVOURITES_IS_LOADING",
+    type: "USER_IS_LOADING",
     favouritesIsLoading
   };
 };
 
 export const fetchFavourites = favs => {
   let query= "";
-
   for (let i = 0; i < favs.length; i++) {
     query += "f"+i+"="+favs[i];
     if (i != favs.length - 1)

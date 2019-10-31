@@ -9,8 +9,7 @@ class Favourites extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // counter: 0
-    }
+    };
   }
 
   componentWillMount() {
@@ -35,24 +34,18 @@ class Favourites extends React.Component {
     if (this.props.userIsLoading || this.props.favouritesIsLoading) {
       return <div>Loading...</div>;
     }
-    if (!this.props.userIsLoading && this.state.counter < 1){
-      return (<div>
-        Loading...
-       {this.setState({
-          counter: 1,
-        })}
-      {this.props.getFavourites(this.props.user.favourites)}
-      </div>)
-    }
+   
     return (
       <React.Fragment>
         <Navbar />
         <div className="itinerary_card_wrapper">
-        {this.props.user.favourites.map((item, index) => (
-          <div key={index}>{item.title}</div>
-          // <Itinerary item={item} index={index} />
-        ))}
-        
+          {this.props.user.favourites.map((item, index) => (
+            <div key={index}>
+              {item.title}
+              <span item={item} index={index}>test</span>
+              {/* <Itinerary item={item} index={index} /> */}
+            </div>
+          ))}
         </div>
         <Footer />
       </React.Fragment>
@@ -65,14 +58,14 @@ const mapStateToProps = state => {
     user: state.user,
     userIsLoading: state.userIsLoading,
     favourites: state.favourites,
-    favouritesIsLoading: state.favouritesIsLoading,
+    // favouritesIsLoading: state.favouritesIsLoading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     getFavourites: id => dispatch(actionCreator.fetchFavourites(id)),
-    getUser: id => dispatch(actionCreator.fetchUser(id)),
+    getUser: id => dispatch(actionCreator.fetchUser(id))
   };
 };
 
